@@ -7,12 +7,12 @@ for (var i = 0; i < N; i++)
 	grid[i] = new Array(N);
 
 // Position:
-var x = Math.floor(N / 2) + 1;
-var y = Math.floor(N / 2);
+var x = Math.floor(N / 2);
+var y = Math.floor(N / 2) + 1;
 
 // Direction:
-var dx = 0;
-var dy = -1;
+var dx = -1;
+var dy = 0;
 
 // Place spiral in grid:
 for (var i = 1; i <= N * N; i++) {
@@ -21,7 +21,7 @@ for (var i = 1; i <= N * N; i++) {
 	move(1);
 
 	// If cell is occupied, reverse and go straight:
-	if (grid[x][y] != undefined) {
+	if (grid[y][x] != undefined) {
 		move(-1);
 		turnRight();
 		turnRight();
@@ -29,7 +29,7 @@ for (var i = 1; i <= N * N; i++) {
 		move(1);
 	}
 
-	grid[x][y] = i;
+	grid[y][x] = i;
 }
 
 // Calculate sum of diagonals:
@@ -38,7 +38,7 @@ for (var i = 0; i < N; i++) {
 	sum += grid[i][i];
 
 	if (i != Math.floor(N / 2))
-		sum += grid[grid.length - 1 - i][i];
+		sum += grid[N - 1 - i][i];
 }
 
 console.log(sum);
@@ -49,8 +49,8 @@ function move(steps) {
 }
 
 function turnRight() {
-	var newDX = dy;
-	var newDY = -dx;
+	var newDX = -dy;
+	var newDY = dx;
 
 	dx = newDX;
 	dy = newDY;
